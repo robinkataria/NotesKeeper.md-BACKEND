@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const usersapi = require('./users')
+const notesapi = require('./notes')
+const todosapi = require('./todos')
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+module.exports = {
+  usersapi,
+  notesapi,
+  todosapi
+}
