@@ -1,3 +1,4 @@
+require('dotenv').config()
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -25,7 +26,7 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: process.env.SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({

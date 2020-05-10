@@ -8,36 +8,36 @@ router.get('/', (req,res)=>res.json({msg:'welcome to node api backend'}));
 router.get('/favicon.ico',(req,res)=>res.status(204))
 
 router.route('/checklogin')
-    .get(user.CheckLogin)
+    .get(user.checkLogin)
 
 router.route('/checkemail')
-    .post(user.CheckEmail)
+    .post(user.checkEmail)
 
 router.route('/register')
-    .post(user.Register)
+    .post(user.register)
 
 router.route('/vuemail')
-    .post(user.VerifyEmail,
+    .post(user.verifyEmail,
         userpassport.authenticate('local', {
             successRedirect: '/loginsuccess',
             failureRedirect: '/loginfail'
         }))
 
 //Oauth using CryPt
-app.get('/crypt/oauth/login',userpassport.authenticate('crypt'))
+router.get('/crypt/oauth/login',userpassport.authenticate('crypt'))
  
-app.get('/crypt/oauth/callback', 
+router.get('/crypt/oauth/callback', 
   userpassport.authenticate('crypt', { failureRedirect: '/loginfail',successRedirect:'/loginsuccess' }))
  
 //local authentication
 router.route('/login')
-    .all(user.ValidateVerify,userpassport.authenticate('local', {
+    .all(user.validateVerify,userpassport.authenticate('local', {
         successRedirect: '/loginsuccess',
         failureRedirect: '/loginfail'
     }))
 
 router.route('/loginsuccess')
-    .get(user.SetActive)
+    .get(user.setActive)
 
 router.route('/loginfail')
     .get((req, res) => res.json({
@@ -46,20 +46,20 @@ router.route('/loginfail')
     }))
 
 router.route('/forgotpwd')
-    .post(user.PasswordResetEmail)
+    .post(user.passwordResetEmail)
 
 router.route('/vpremail')
-    .post(user.VerifyPasswordResetEmail)
+    .post(user.verifyPasswordResetEmail)
 
 router.route('/changepassword')
-    .post(user.ResetPassword,
+    .post(user.resetPassword,
         userpassport.authenticate('local', {
             successRedirect: '/loginsuccess',
             failureRedirect: '/loginfail'
         }))
 
 router.route('/logout')
-    .get(user.Logout);
+    .get(user.logout);
 
 
 module.exports = router;

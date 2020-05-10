@@ -17,7 +17,6 @@ passport.deserializeUser((id,done)=>{
 passport.use(User.createStrategy())
 
 
- 
 passport.use(new CryPtStrategy({
          clientID: process.env.CLIENT_ID,
          clientSecret: process.env.CLIENT_SECRET,

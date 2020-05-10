@@ -6,6 +6,11 @@ const notebooksArraySchema = mongoose.Schema({
     id:{type:String,unique:true},
 })
 
+const todosArraySchema = mongoose.Schema({
+  name:{type:String,unique:true},
+    id:{type:String,unique:true},
+})
+
 const userSchema = mongoose.Schema({
   email:{type:String,unique:true},//email is the username
   password:{type:String},
@@ -16,7 +21,8 @@ const userSchema = mongoose.Schema({
   verified:{type:Boolean},
   createdAt:{type:Date,default:Date.now},
   status:{type:String},
-  notesBooks:[notebooksArraySchema]
+  notebooks:[notebooksArraySchema],
+  todos:[todosArraySchema]
 })
 
 const options = {
