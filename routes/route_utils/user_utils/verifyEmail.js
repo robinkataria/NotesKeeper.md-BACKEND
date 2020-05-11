@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken')
 const User = require('../../../src/config/models/index').User
 
 function verifyEmail(req,res,next){
-    const token = req.body
-    jwt.verify(token,proccess.env.EMAIL_SECRET,(err,payload)=>{
+    const token = req.query.token
+    jwt.verify(token,process.env.EMAIL_SECRET,(err,payload)=>{
         if(err){
             if(err.name ===  'TokenExpiredError'){res.json({status:422,error:'token_exipred'})}
             else{res.json({error:'server_error',status:500})}
@@ -15,7 +15,7 @@ function verifyEmail(req,res,next){
                 if(err){
                     res.json({error:'server_error',status:500})
                 }else if(doc){
-                      req.body.username = payload.username
+                      req.body.email = payload.email
                       req.body.password = payload.password
                       next();
                 }else{

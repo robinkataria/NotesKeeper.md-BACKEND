@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const notesArraySchema = mongoose.Schema({
-    name:{type:String,required:true,unique:true},
+    name:{type:String,required:true},
     id:{type:String}
 })
 

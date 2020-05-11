@@ -1,10 +1,10 @@
 const User = require('../../../src/config/models/index').User
 
 function readAllNotebooks(req,res,next){
-User.findOne({user_id:req.user._id},{notebooks:1,_id:0},(err,notebooks)=>{
+User.findOne({_id:req.user._id},{notebooks:1},(err,user)=>{
     if(err){res.json({status:500})}
-    else if(notebooks){
-        res.json({status:200,notebooks})
+    else if(user){
+        res.json({status:200,notebooks:user.notebooks})
     }
     else{res.json({status:401})}
 })

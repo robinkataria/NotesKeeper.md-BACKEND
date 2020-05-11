@@ -43,7 +43,7 @@ router.route('/readnote')
 
 //edit a item
 router.route('/editnote')
-.post(nnotes.checkNoteName,notes.editNote)
+.post(notes.checkNoteName,notes.editNote)
 
 //delete a item
 router.route('/deletenote')
