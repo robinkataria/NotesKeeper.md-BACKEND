@@ -52,7 +52,7 @@ app.use(cookieParser());
 //Routers
 app.use('/',Router.usersapi);
 app.use('/notesapi',Router.notesapi)
-app.use('/todoapi',Router.todosapi)
+app.use('/todosapi',Router.todosapi)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

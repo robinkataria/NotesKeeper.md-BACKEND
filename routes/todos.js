@@ -13,7 +13,7 @@ router.route('/readtodo')
 
 //create atodo list
 router.route('/createtodo')
-.post(todos.createTodo)
+.post(todos.checkTodoName,todos.createTodo)
 
 //delete a todo list
 router.route('/deletetodo')
@@ -21,10 +21,10 @@ router.route('/deletetodo')
 
 //editname of todo list
 router.route('/edittodoname')
-.post(todos.editTodoName)
+.post(todos.checkTodoName,todos.editTodoName)
 
 //search todos
-router.route('/searchTodos')
+router.route('/searchtodos')
 .post(todos.searchTodos)
 
 //item routes

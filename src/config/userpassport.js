@@ -3,13 +3,13 @@ const CryPtStrategy = require('passport-crypt-oauth20')
 const User = require('./models/index').User
 
 passport.serializeUser((user,done)=>{
-    console.log('serialize',user.username)
+    console.log('serialize',user.email)
     done(null,{_id:user._id})
 })
 
 passport.deserializeUser((id,done)=>{
     User.findOne({_id:id},(err,user)=>{
-        console.log('desiralize',user.username)
+        console.log('desiralize',user.email)
         done(null,user)
     })
 })

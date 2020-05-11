@@ -1,6 +1,9 @@
 const Todo = require('../../../src/config/models/index').Todo
 
 function createItem(req, res, next) {
+    if(!req.body.id && !req.body.title ){
+        res.json({status:423})
+    }else{
     const {
         id,
         title,
@@ -35,6 +38,7 @@ function createItem(req, res, next) {
             })
         }
     })
+}
 }
 
 module.exports = createItem

@@ -8,14 +8,14 @@ function passwordResetEmail(req, res, next) {
     User.findOne({ email: req.body.email}, {name:1,verified:1}, (err, doc) => {
         if (err) {
             res.json({
-                error: 'server_error'
+                error: 'server_error',status:500
             })
         } else if (doc) {
             if(doc.verified){
                  jwt.sign({email:req.body.email},process.env.RESET_PWD_SECRET,{expiresIn:600},(err,token)=>{
                     if(err){res.json({status:500})}
                     else{
-                        let promise = mail.sendEmail(passwordResetEmailTemplate(email,name,token))
+                        let promise = mail.sendEmail(passwordResetEmailTemplate(req.body.email,doc.name,token))
                         promise.then(result=>res.json({status:200,msg:'mail sent'}))
                         .catch(err=>res.json({status:500}))
                     }

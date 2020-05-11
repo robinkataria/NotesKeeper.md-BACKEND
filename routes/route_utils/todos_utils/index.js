@@ -10,9 +10,11 @@ const deleteMultipleItems = require('./deleteMultipleItems')
 const deleteAllItems = require('./deleteAllItems')
 const createItem = require('./createItem')
 const editItem = require('./editItem')
+const checkTodoName = require('./checkTodoName')
 
 
 module.exports = {
+    checkTodoName,
     readAllTodos,
     readTodo,
     createTodo,

@@ -16,8 +16,9 @@ router.route('/checkemail')
 router.route('/register')
     .post(user.register)
 
-router.route('/vuemail')
-    .post(user.verifyEmail,
+    ///change it in frontend
+router.route('/verifyemail')
+    .get(user.verifyEmail,
         userpassport.authenticate('local', {
             successRedirect: '/loginsuccess',
             failureRedirect: '/loginfail'
@@ -48,8 +49,9 @@ router.route('/loginfail')
 router.route('/forgotpwd')
     .post(user.passwordResetEmail)
 
-router.route('/vpremail')
-    .post(user.verifyPasswordResetEmail)
+    //change in frontend
+router.route('/resetpassword')
+    .get(user.verifyPasswordResetEmail)
 
 router.route('/changepassword')
     .post(user.resetPassword,

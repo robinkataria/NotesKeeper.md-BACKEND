@@ -9,7 +9,7 @@ const template = {
     html: `<h3>Hello ${beautifyName(reciverName)}</h3>
     <p>The Password Reset link is given below<p>
     <a href=${process.env.FRONT_DOMAIN+'/resetpassword?token='+token}>${process.env.FRONT_DOMAIN+'/resetpassword?token='+token}<a>
-    <small>This link is going to expire after 10 minute of Generation</small>
+    <br/><small>This link is going to expire after 10 minute of Generation</small>
     <p>Regards</p>
     <p>NotesKeeper Support Team</p>` // html body
 }

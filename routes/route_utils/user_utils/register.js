@@ -1,4 +1,4 @@
-const User = require('../../../src/config/models/index')
+const User = require('../../../src/config/models/index').User
 const mail = require('../../../src/utils/mail/index')
 const verifyEmailTemplate = require('../../../src/utils/mail/templates/index').verifyEmailTemplate
 const jwt =require('jsonwebtoken')
@@ -25,11 +25,11 @@ function register(req, res, next) {
                     } 
         }else{
             jwt.sign({email,password},process.env.EMAIL_SECRET,{expiresIn:'1h'},(err,token)=>{
-                if(err){res.json({status:500})}
+                if(err){res.json({status:500,msg:'jwt'})}
                 else{
                     let promise = mail.sendEmail(verifyEmailTemplate(email,name,token))
                     promise.then(result=>res.json({status:200,msg:'mail sent'}))
-                    .catch(err=>res.json({status:500}))
+                    .catch(err=>res.json({status:500,msg:'mail',err}))
                 }
             })
             
