@@ -5,6 +5,9 @@ const passwordResetEmailTemplate = require('../../../src/utils/mail/templates/in
 const jwt =require('jsonwebtoken')
 
 function passwordResetEmail(req, res, next) {
+    if(!req.body.email){
+        res.json({status:423})
+    }else{
     User.findOne({ email: req.body.email}, {name:1,verified:1}, (err, doc) => {
         if (err) {
             res.json({
@@ -32,6 +35,7 @@ function passwordResetEmail(req, res, next) {
             })
         }
     })
+}
 }
 
 module.exports = passwordResetEmail

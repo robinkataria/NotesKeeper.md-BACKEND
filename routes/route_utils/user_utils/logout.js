@@ -3,7 +3,7 @@ const User =  require('../../../src/config/models/index').User
 
 function logout(req,res,next){
     if(req.isAuthenticated()){
-        User.findOneAndUpdate({username:req.user.username},{
+        User.findOneAndUpdate({_id:req.user._id},{
             '$set':{
                 status:'IA'
             }
