@@ -10,16 +10,7 @@ function deleteNote(req,res,next){
         Note.findOneAndDelete({_id:note_id,notebook_id,user_id:req.user._id},(err,note)=>{
             if(err){res.json({status:500})}
             else if(note){
-                Notebook.findOneAndUpdate({user_id:req.user._id,_id:notebook_id},{$pull:{
-                    'notes':{id:note_id}
-                }},{new:true,strict:false},(err,notebook)=>{
-                    if(err){res.json({status:500})}
-                    else if(notebook){
-                        res.json({status:200,notebook:notebook})
-                    }else{
-                        res.json({status:401})
-                    }
-                })   
+               next()
             }else{
                 res.json({status:401})
             }

@@ -5,7 +5,7 @@ const noteSchema = mongoose.Schema({
 user_id:{type:String,required:true},
 notebook_id:{type:String,required:true},
 name:{type:String,required:true},
-description:{type:String},
+commit_message:{type:String},
 type:{type:String},//either db or file
 data:{type:String},//null incase of file
 createdAt:{type:Date,default:Date.now}

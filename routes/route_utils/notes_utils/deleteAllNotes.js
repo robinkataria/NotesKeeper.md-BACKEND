@@ -10,16 +10,7 @@ function deleteAllNotes(req,res,next){
         Note.deleteMany({user_id:req.user._id,notebook_id},(err)=>{
             if(err){res.json({status:500})}
             else{
-                Notebook.findOneAndUpdate({_id:notebook_id,user_id:req.user._id},{$set:{
-                    notes:[]
-                }},{new:true},(err,notebook)=>{
-                    if(err){res.json({status:500})}
-                    else if(notebook){
-                        res.json({status:200,notes:notebook.notes})
-                    }else{
-                        res.json({status:401})
-                    }
-                })
+               next()
             }
         })
     }

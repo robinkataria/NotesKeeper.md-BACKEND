@@ -18,7 +18,7 @@ router.route('/register')
 
     ///change it in frontend
 router.route('/verifyemail')
-    .get(user.verifyEmail,
+    .post(user.verifyEmail,
         userpassport.authenticate('local', {
             successRedirect: '/loginsuccess',
             failureRedirect: '/loginfail'

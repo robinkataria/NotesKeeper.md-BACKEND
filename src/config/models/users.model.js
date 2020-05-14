@@ -1,28 +1,18 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose'); 
 
-const notebooksArraySchema = mongoose.Schema({
-    name:{type:String,unique:true},
-    id:{type:String,unique:true},
-})
 
-const todosArraySchema = mongoose.Schema({
-  name:{type:String,unique:true},
-    id:{type:String,unique:true},
-})
 
 const userSchema = mongoose.Schema({
   email:{type:String,unique:true},//email is the username
   password:{type:String},
-  cryptId:{type:String,unique:true},//feature for login using CryPt
+  cryptId:{type:String},//feature for login using CryPt
   name:{type:Object},
   attempts:{type:Number},
   last:{type:String},
   verified:{type:Boolean},
   createdAt:{type:Date,default:Date.now},
   status:{type:String},
-  notebooks:[notebooksArraySchema],
-  todos:[todosArraySchema]
 })
 
 const options = {

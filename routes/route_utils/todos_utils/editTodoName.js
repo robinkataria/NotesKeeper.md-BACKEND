@@ -11,18 +11,10 @@ function editTodoName(req,res,next){
             name:name
         }},(err,document)=>{
             if(err){res.json({status:500})}
-            else{
-                User.findOneAndUpdate({_id:req.user._id},{$set:{
-                    'todos.$[n].name':name
-                }},{
-                    new:true,strict:false,
-                    arrayFilters:[{'n.id':document._id}]
-                },(err,userdoc)=>{
-                    if(err){res.json({status:500})}
-                    else{
-                        res.json({status:200,todos:userdoc.todos})
-                    }
-                })
+            else if(document){
+               next()
+            }else{
+                res.json({status:401})
             }
         })
     }

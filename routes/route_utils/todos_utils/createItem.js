@@ -5,32 +5,38 @@ function createItem(req, res, next) {
         res.json({status:423})
     }else{
     const {
-        id,
+        todo_id,
         title,
-        description
+        description,
+        Time
     } = req.body
     Todo.findOneAndUpdate({
         user_id: req.user._id,
-        _id: id
+        _id: todo_id
     }, {
         $push: {
             items: {
                 title,
-                description: description || ''
+                description: description || '',
+                Time:Time || new Date(),
+                completed:false
             }
+        },
+        $inc:{
+           total_tasks:1 
         }
     }, {
         new: true,
         strict: false
-    }, (err, document) => {
+    }, (err, todolist) => {
         if (err) {
             res.json({
                 status: 500
             })
-        } else if (document) {
+        } else if (todolist) {
             res.json({
                 status: 200,
-                items: document.items
+                todolist
             })
         } else {
             res.json({

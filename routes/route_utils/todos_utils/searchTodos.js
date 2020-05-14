@@ -8,7 +8,7 @@ function searchTodos(req,res,next){
     } else {
         const {query} = req.body
         const regex = new RegExp(query,'i')
-        Todo.find({user_id:req.user._id,name:{$regex:regex}},{name:1}
+        Todo.find({user_id:req.user._id,name:{$regex:regex}},{user_id:0}
             ,(err,todos)=>{
                 if(err){res.json({status:500})}
                 else if(todos){
