@@ -9,7 +9,7 @@ function logout(req,res,next){
             }
         },{strict:false},(err)=>{
             if(err){
-                res.json({error:'server_error'})
+                res.json({error:'server_error',status:500})
             }else{
                  req.logout();
                 res.json({status:200,user:''});
@@ -17,7 +17,7 @@ function logout(req,res,next){
         })
            
     }else{
-            res.json({status:403,msg:'login first to logout'});
+            res.json({status:401,msg:'login first to logout'});
     }
 }
 

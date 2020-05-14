@@ -1,12 +1,14 @@
 
-const User = require('../../../src/config/models/index').User
+const Todo = require('../../../src/config/models/index').Todo
 
 function readAllTodos(req,res,next){
-    User.findOne({_id:req.user._id},{todos:1},(err,user)=>{
+    Todo.find({user_id:req.user._id},{user_id:0,items:0},(err,todos)=>{
         if(err){
             res.json({status:500})
+        }else if(todos){
+            res.json({status:200,todos})
         }else{
-            res.json({status:200,todos:user.todos})
+             res.json({status:500})
         }
     })
 }

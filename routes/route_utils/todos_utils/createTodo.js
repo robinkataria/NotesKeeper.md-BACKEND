@@ -14,35 +14,15 @@ function createTodo(req,res,next) {
         notes: []
     }, (err, document) => {
         if (err) {
-            console.log(err)
             res.json({
                 status: 500
             })
-        } else {
-            User.findOneAndUpdate({
-                _id: req.user._id
-            }, {
-                $push: {
-                    'todos': {
-                        name: document.name,
-                        id: document._id
-                    }
-                }
-            }, {
-                new: true,
-                strict: false
-            }, (err, userdoc) => {
-                if (err) {
-                    res.json({
-                        status: 500
-                    })
-                } else {
-                    res.json({
-                        staus: 200,
-                        todos: userdoc.todos
-                    })
-                }
-            })
+        } else if(document) {
+         next()  
+        }else{
+                 res.json({
+                                status: 401
+                            })
         }
     })
 }

@@ -2,10 +2,10 @@ const jwt = require('jsonwebtoken')
 const User = require('../../../src/config/models/index').User
 
 function verifyEmail(req,res,next){
-    if(!req.query.token && req.query.token.lenght < 20){
+    if(!req.body.token && req.body.token.lenght < 20){
         res.json({status:423})
     }else{
-    const token = req.query.token
+    const token = req.body.token
     jwt.verify(token,process.env.EMAIL_SECRET,(err,payload)=>{
         if(err){
             if(err.name ===  'TokenExpiredError'){res.json({status:422,error:'token_exipred'})}

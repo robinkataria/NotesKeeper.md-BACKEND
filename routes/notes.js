@@ -4,38 +4,38 @@ const router = express.Router()
 
 
 
-//items route
+//items route/
 router.route('/searchnotebooks')
 .post(notes.searchNotebooks)
 
-//read all todo lists
+//read all Notebooks /
 router.route('/readallnotebooks')
 .get(notes.readAllNotebooks)
 
-//read a selected todo list
+//read a selected Notebook list/
 router.route('/readnotebook')
 .post(notes.readNotebook)
 
-//create atodo list
+//create a  Notebook/
 router.route('/createnotebook')
-.post(notes.checkNotebookName,notes.createNotebook)
+.post(notes.checkNotebookName,notes.createNotebook,notes.readAllNotebooks)
 
-//delete a todo list
+//delete a Notebook /
 router.route('/deletenotebook')
-.post(notes.deleteNotebook)
+.post(notes.deleteNotebook,notes.readAllNotebooks)
 
-//editname of todo list
+//editname of Notebook
 router.route('/editnotebookname')
-.post(notes.checkNotebookName,notes.editNotebookName)
+.post(notes.checkNotebookName,notes.editNotebookName,notes.readAllNotebooks)
 
 
-//items route
+//items route/
 router.route('/searchnotes')
 .post(notes.searchNotes)
 
 //create item
 router.route('/createnote')
-.post(notes.checkNoteName,notes.createNote)
+.post(notes.checkNoteName,notes.createNote,notes.readNote)
 
 //read note
 router.route('/readnote')
@@ -43,18 +43,18 @@ router.route('/readnote')
 
 //edit a item
 router.route('/editnote')
-.post(notes.checkNoteName,notes.editNote)
+.post(notes.checkNoteName,notes.editNote,notes.readNote)
 
-//delete a item
+//delete a item/
 router.route('/deletenote')
-.post(notes.deleteNote)
+.post(notes.deleteNote,notes.readNotebook)
 
 //delete multiple items
 router.route('/deletemultiplenotes')
-.post(notes.deleteMultipleNotes)
+.post(notes.deleteMultipleNotes,notes.readNotebook)
 
-//delete all items
+//delete all items/
 router.route('/deleteallnotes')
-.post(notes.deleteAllNotes)
+.post(notes.deleteAllNotes,notes.readNotebook)
 
 module.exports = router

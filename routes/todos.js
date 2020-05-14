@@ -13,15 +13,15 @@ router.route('/readtodo')
 
 //create atodo list
 router.route('/createtodo')
-.post(todos.checkTodoName,todos.createTodo)
+.post(todos.checkTodoName,todos.createTodo,todos.readAllTodos)
 
 //delete a todo list
 router.route('/deletetodo')
-.post(todos.deleteTodo)
+.post(todos.deleteTodo,todos.readAllTodos,todos.readAllTodos)
 
 //editname of todo list
 router.route('/edittodoname')
-.post(todos.checkTodoName,todos.editTodoName)
+.post(todos.checkTodoName,todos.editTodoName,todos.readAllTodos)
 
 //search todos
 router.route('/searchtodos')

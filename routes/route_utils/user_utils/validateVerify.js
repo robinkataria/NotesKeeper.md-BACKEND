@@ -1,7 +1,7 @@
 const User = require('../../../src/config/models/index').User
 
 const validateVerify = (req,res,next)=>{
-    if(req.body.email === 'undefined'){
+    if(!req.body.email){
         res.json({error:'missing_params',status:423})
     }else{
     User.findOne({email:req.body.email},{verified:1},(err,doc)=>{
