@@ -41,6 +41,10 @@ router.route('/createitem')
 router.route('/edititem')
 .post(todos.editItem)
 
+//completed task
+router.route('/marktaskcompleted')
+.post(todos.markTaskCompleted)
+
 //delete a item
 router.route('/deleteitem')
 .post(todos.deleteItem)

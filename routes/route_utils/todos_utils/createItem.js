@@ -1,7 +1,7 @@
 const Todo = require('../../../src/config/models/index').Todo
 
 function createItem(req, res, next) {
-    if(!req.body.id && !req.body.title ){
+    if(!req.body.todo_id && !req.body.title ){
         res.json({status:423})
     }else{
     const {
@@ -18,7 +18,7 @@ function createItem(req, res, next) {
             items: {
                 title,
                 description: description || '',
-                Time:Time || new Date(),
+                Time:Time ,
                 completed:false
             }
         },

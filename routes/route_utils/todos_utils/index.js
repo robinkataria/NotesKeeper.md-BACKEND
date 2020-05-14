@@ -11,9 +11,11 @@ const deleteAllItems = require('./deleteAllItems')
 const createItem = require('./createItem')
 const editItem = require('./editItem')
 const checkTodoName = require('./checkTodoName')
+const markTaskCompleted = require('./markTaskCompleted')
 
 
 module.exports = {
+    markTaskCompleted,
     checkTodoName,
     readAllTodos,
     readTodo,

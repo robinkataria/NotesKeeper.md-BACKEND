@@ -1,16 +1,15 @@
 const Todo = require('../../../src/config/models/index').Todo
 
-function editItem(req,res,next){
-    if(!req.body.todo_id && !req.body.task_id && !req.body.title){
+function markTaskCompleted(req,res,next){
+    if(!req.body.todo_id && !req.body.task_id){
         res.json({status:423})
     }else{
-        const {todo_id,task_id,title,Time,description} = req.body
+        const {todo_id,task_id} = req.body
         Todo.findOneAndUpdate({user_id:req.user._id,_id:todo_id},{
             $set:{
-                'items.$[n].title':title,
-                'items.$[n].description':description || '',
-                'items.$[n].Time':Time,
-            }
+                'items.$[n].completed':true
+            },
+            $inc:{completed_tasks:1}
         },{new:true,strict:false,
         arrayFilters:[{'n._id':task_id}]},(err,todolist)=>{
             if(err){res.json({status:500})}
@@ -23,4 +22,4 @@ function editItem(req,res,next){
     }
 }
 
-module.exports = editItem
+module.exports = markTaskCompleted
