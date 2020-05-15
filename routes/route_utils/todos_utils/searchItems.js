@@ -1,36 +1,36 @@
 const Todo = require('../../../src/config/models/index').Todo
 
 function searchItems(req, res, next) {
-    if (!req.body.id && !req.body.query) {
+    if (!req.body.todo_id && !req.body.query) {
         res.json({
             status: 423
         })
     } else {
         const {
-            id,
+            todo_id,
             query
         } = req.body
         const regex = new RegExp(query, 'i')
         Todo.findOne({
                 user_id: req.user._id,
-                _id: id
+                _id: todo_id
             }, {
-                items: 1
+               user_id:0
             },
-            (err, document) => {
+            (err, todolist) => {
                 if (err) {
                     res.json({
                         status: 500
                     })
-                } else if (document) {
-                    const searchResult = document.items.filter(item => {
+                } else if (todolist) {
+                    const searchResult = todolist.items.filter(item => {
                         if (regex.test(item.title) || regex.test(item.description)) {
                             return item
                         }
                     })
                     res.json({
                         status: 200,
-                        items: searchResult
+                        todolist:{...todolist.toObject(),items:searchResult}
                     })
                 } else {
                     res.json({
