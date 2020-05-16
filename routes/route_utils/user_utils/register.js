@@ -18,9 +18,7 @@ function register(req, res, next) {
             name,
             email,
             verified: false,
-            status: 'IA',
-            notebooks: [],
-            todos: []
+            status: 'IA'
         }, password, (err, account) => {
             if (err) {
                 if (err.name === 'UserExistsError') {

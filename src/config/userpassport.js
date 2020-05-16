@@ -33,7 +33,9 @@ passport.use(new CryPtStrategy({
                     name:profile.name,
                     cryptId:profile.cryptId,
                     access_token:accessToken,
-                    refersh_token:refreshToken
+                    refersh_token:refreshToken,
+                    verified: true,
+                    status: 'A',
                 },(error,userdoc)=>{
                     return done(error,userdoc)
                 })
