@@ -25,11 +25,20 @@ router.route('/verifyemail')
         }))
 
 //Oauth using CryPt
-router.get('/crypt/oauth/login',userpassport.authenticate('crypt'))
+router.route('/crypt/oauth/login')
+    .get(userpassport.authenticate('crypt'))
  
-router.get('/crypt/oauth/callback', 
-  userpassport.authenticate('crypt', { failureRedirect: '/loginfail',successRedirect:'/loginsuccess' }))
+router.route('/crypt/oauth/callback') 
+  .get(userpassport.authenticate('crypt', { failureRedirect: '/crypt/fail',successRedirect:'/crypt/success' }))
  
+router.get('/crypt/fail',(req,res)=>{
+ res.status(301).redirect('http://localhost:3000')
+})
+
+router.get('/crypt/success',(req,res)=>{
+ res.status(301).redirect('http://localhost:3000')
+})
+
 //local authentication
 router.route('/login')
     .all(user.validateVerify,userpassport.authenticate('local', {
@@ -51,7 +60,7 @@ router.route('/forgotpwd')
 
     //change in frontend
 router.route('/resetpassword')
-    .get(user.verifyPasswordResetEmail)
+    .post(user.verifyPasswordResetEmail)
 
 router.route('/changepassword')
     .post(user.resetPassword,

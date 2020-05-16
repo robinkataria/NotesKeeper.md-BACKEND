@@ -13,9 +13,10 @@ const searchNotebooks = require('./searchNotebooks')
 const searchNotes = require('./searchNotes')
 const checkNoteName = require('./checkNoteName')
 const checkNotebookName = require('./checkNotebookName')
-
+const uploadNote = require('./uploadNote')
 
 module.exports = {
+    uploadNote,
     createNote,
     createNotebook, 
     deleteAllNotes ,

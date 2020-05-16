@@ -13,6 +13,8 @@ const userSchema = mongoose.Schema({
   verified:{type:Boolean},
   createdAt:{type:Date,default:Date.now},
   status:{type:String},
+  access_token:{type:String},
+  refersh_token:{type:String}
 })
 
 const options = {
