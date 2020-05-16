@@ -32,11 +32,11 @@ router.route('/crypt/oauth/callback')
   .get(userpassport.authenticate('crypt', { failureRedirect: '/crypt/fail',successRedirect:'/crypt/success' }))
  
 router.get('/crypt/fail',(req,res)=>{
- res.status(301).redirect('http://localhost:3000')
+ res.status(301).redirect('https://noteskeeper-md.web.app')
 })
 
 router.get('/crypt/success',(req,res)=>{
- res.status(301).redirect('http://localhost:3000')
+ res.status(301).redirect('https://noteskeeper-md.web.app')
 })
 
 //local authentication
