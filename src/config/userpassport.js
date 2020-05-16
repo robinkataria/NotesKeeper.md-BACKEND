@@ -20,7 +20,7 @@ passport.use(User.createStrategy())
 passport.use(new CryPtStrategy({
          clientID: process.env.CLIENT_ID,
          clientSecret: process.env.CLIENT_SECRET,
-         callbackURL: 'http://localhost:5000/crypt/oauth/callback',
+         callbackURL: 'https://noteskeeper-md.herokuapp.com/crypt/oauth/callback',
          scope:'profile'
        },
        function(accessToken, refreshToken, profile, done) {
