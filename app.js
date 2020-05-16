@@ -41,13 +41,10 @@ app.use(session({
 app.use(userpassport.initialize());
 app.use(userpassport.session());
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended:true
 }));
 app.use(bodyParser.json());
-app.use(cookieParser());
 
 //Routers
 app.use('/',Router.usersapi);

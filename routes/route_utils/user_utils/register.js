@@ -4,7 +4,7 @@ const verifyEmailTemplate = require('../../../src/utils/mail/templates/index').v
 const jwt = require('jsonwebtoken')
 
 function register(req, res, next) {
-    if (!req.body.email && !req.body.password && !req.body.email) {
+    if (!req.body.email && !req.body.password && !req.body.name) {
         res.json({
             status: 423
         })

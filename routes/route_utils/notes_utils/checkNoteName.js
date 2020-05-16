@@ -1,6 +1,7 @@
 const Note = require('../../../src/config/models/index').Note
 
 function checkNoteName(req,res,next){
+
     if(!req.body.name && !req.body.notebook_id){
             res.json({status:423})
     }else{

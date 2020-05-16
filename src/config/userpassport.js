@@ -24,11 +24,14 @@ passport.use(new CryPtStrategy({
          scope:'profile'
        },
        function(accessToken, refreshToken, profile, done) {
-        User.findOne({cryptId:profile.cryptId},(err,user)=>{
+        User.findOne({email:profile.email},(err,user)=>{
             if(err) throw err
             else if(user){return done(err,user)}
             else{
-                User.create({...profile,
+                User.create({
+                    email:profile.email,
+                    name:profile.name,
+                    cryptId:profile.cryptId,
                     access_token:accessToken,
                     refersh_token:refreshToken
                 },(error,userdoc)=>{

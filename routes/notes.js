@@ -33,9 +33,13 @@ router.route('/editnotebookname')
 router.route('/searchnotes')
 .post(notes.searchNotes)
 
-//create item
+//create note
 router.route('/createnote')
 .post(notes.checkNoteName,notes.createNote,notes.readNote)
+
+//upload note
+router.route('/uploadnote')
+.post(notes.uploadNote,notes.readNote)
 
 //read note
 router.route('/readnote')
