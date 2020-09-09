@@ -43,6 +43,8 @@ app.use(session({
     secure:true
   }
 }));
+
+
 app.use(userpassport.initialize());
 app.use(userpassport.session());
 app.use(logger('dev'));
