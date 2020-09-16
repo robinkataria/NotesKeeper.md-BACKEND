@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
   email:{type:String,unique:true},//email is the username
   password:{type:String},
   cryptId:{type:String},//feature for login using CryPt
-  name:{type:Object},
+  name:{type:String},
   attempts:{type:Number},
   last:{type:String},
   verified:{type:Boolean},

@@ -1,6 +1,6 @@
-const User = require('../../../src/config/models/index').User
+const { User } = require('../../../src/config/models/index')
 
-const setActive = (req, res, next) => {
+module.exports = (req, res, next) => {
     if (req.isAuthenticated()) {
         User.findOneAndUpdate({
             _id: req.user._id
@@ -23,11 +23,10 @@ const setActive = (req, res, next) => {
                     logged_in:true,
                 })
             }else{
-                res.json({error:'no user exists',status:401})
+                res.json({error:"User Doesn't Exists",status:422})
             }
         })
     } else {
-        res.redirect('/login')
+        res.json({status:401,type:'Unauthenticated'})
     }
 }
-module.exports = setActive

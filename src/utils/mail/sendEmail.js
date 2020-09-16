@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const senEmail = async (template)=>{
+const sendEmail = async (template)=>{
   let transporter = nodemailer.createTransport({
     service:'gmail',// true for 465, false for other ports
     auth: {
@@ -10,10 +10,8 @@ const senEmail = async (template)=>{
   });
 
   // send mail with defined transport object
-  let info = await transporter.sendMail(template);
-
-  console.log("Message sent: %s", info.messageId,'exec')
+  await transporter.sendMail(template)
 }
 
 
-module.exports = senEmail
+module.exports = sendEmail

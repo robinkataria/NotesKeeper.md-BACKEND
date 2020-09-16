@@ -1,36 +1,27 @@
 const jwt = require('jsonwebtoken')
-const User = require('../../../src/config/models/index').User
+const { User } = require('../../../src/config/models/index')
 
-function verifyEmail(req,res,next){
-    if(!req.body.token && req.body.token.lenght < 20){
+module.exports = (req,res,next) => {
+    const { token } = req.body
+    if(!token || token.length < 160 ){
         res.json({status:423})
     }else{
-    const token = req.body.token
-    jwt.verify(token,process.env.EMAIL_SECRET,(err,payload)=>{
-        if(err){
-            if(err.name ===  'TokenExpiredError'){res.json({status:422,error:'token_exipred'})}
-            else{res.json({error:'server_error',status:500})}
-        }else{
-        User.findOneAndUpdate({email:payload.email},
-            {'$set':{
-                'verified':true
-            }},{strict:false,new:true},(err,doc)=>{
-                if(err){
-                    res.json({error:'server_error',status:500})
-                }else if(doc){
-                      req.body.email = payload.email
-                      req.body.password = payload.password
-                      next();
-                }else{
-                    res.json({
-                        status:423,
-                        msg:'no account exists'
+        jwt.verify(token,process.env.EMAIL_SECRET,(error,payload)=>{
+            if(error){
+                if(err.name ===  'TokenExpiredError'){res.json({status:423,error:'token_exipred'})}
+                else{res.json({error:'server_error',status:500})}
+            }else{
+                req.body.email = payload.email
+                req.body.password = payload.password
+                User.findOneAndUpdate({email:req.body.email},
+                    {'$set':{
+                        'verified':true
+                    }},{strict:false,new:true},(error,user)=>{
+                        if(error){res.json({error:'server_error',status:500})}
+                        else if(user){next()}
+                        else{res.json({status:423,msg:'no account exists'})}
                     })
-                }
-            })
-     }
-    })
+            }
+        })
+    }
 }
-}
-
-module.exports = verifyEmail

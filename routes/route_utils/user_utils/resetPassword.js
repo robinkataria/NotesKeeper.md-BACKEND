@@ -1,26 +1,19 @@
-const User = require('../../../src/config/models/index').User
+const { User } = require('../../../src/config/models/index')
 
-function resetPassword(req,res,next){
-    if(!req.body.email && !req.body.password){
-        res.json({status:423})
+module.exports = (req,res,next) => {
+    if(!req.body.password || req.body.password.length < 8){
+        res.json({status:423,type:'Password Validation Failed'})
     }else{
-        console.log(req.body)
-        const {email,password} = req.body
-        User.findOne({email})
+        
+        User.findOne({email:req.body.email})
         .then((user)=>{
-            user.setPassword(password,(err,u)=>{
-                if(err){
-                    res.json({status:500})
+            user.setPassword(req.body.password,(err,updatedUser)=>{
+                if(err){res.json({status:500})
                 }else{
-                    u.save(()=>{
-                        next()
-                    }) 
+                    updatedUser.save(()=> res.json({status:200,msg:'Password Updated'}))
                 }
             })
-        }).catch(err=>{
-            res.json({status:500})
-        })
+        }).catch(err =>{res.json({status:500})})
     }
 }
 
-module.exports = resetPassword

@@ -1,6 +1,6 @@
-const User = require('../../../src/config/models/index').User
+const  { User } = require('../../../src/config/models')
 
-function CheckLogin(req,res,next){
+module.exports = (req,res,next) => {
  if(req.isAuthenticated()){
      User.findOne({_id:req.user._id},{email:1,name:1},(err,user)=>{
          if(err){
@@ -15,5 +15,3 @@ function CheckLogin(req,res,next){
      res.json({status:401})
  } 
 }
-
-module.exports = CheckLogin

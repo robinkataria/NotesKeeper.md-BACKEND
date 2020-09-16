@@ -41,8 +41,6 @@ passport.use(new CryPtStrategy({
                 })
             }
         })
-       }
-     ));
-
+}))
 
 module.exports = passport
